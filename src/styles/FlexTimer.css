@@ -1,0 +1,170 @@
+/* Main styles */
+.ft_FlexTimer {
+    font-family: 'Helvetica Neue', Helvetica, sans-serif;
+    font-size: 40px;
+    text-align: center;
+    color: #888;
+    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.3);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+}
+
+.ft_group {
+    display: inline-block;
+    margin-right: 15px;
+    position: relative;
+}
+
+.ft_group.ft_lastItem {
+    margin-right: 0;
+}
+
+.ft_group > .ft_label {
+    position: absolute;
+    bottom: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 14px;
+    color: #666;
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+
+/* Container styles */
+.ft_FlexTimer .ft_group > .ft_container {
+    position: relative;
+    width: 50px;
+    height: 70px;
+    overflow: hidden;
+    border-radius: 8px;
+    background: linear-gradient(145deg, #333, #222);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    perspective: 1000px;
+    margin-right: 10px;
+}
+
+.ft_FlexTimer .ft_group > .ft_container.ft_lastItem {
+    margin-right: 0;
+}
+
+/* Flip card styles */
+.ft_FlexTimer .ft_group > .ft_container > div {
+    position: absolute;
+    width: 100%;
+    height: 50%;
+    overflow: hidden;
+    backface-visibility: hidden;
+    transform-style: preserve-3d;
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.ft_FlexTimer .ft_group > .ft_container > .up {
+    top: 0;
+    background: linear-gradient(145deg, #444, #333);
+    transform-origin: 50% 100%;
+    border-radius: 8px 8px 0 0;
+}
+
+.ft_FlexTimer .ft_group > .ft_container > .down {
+    bottom: 0;
+    background: linear-gradient(145deg, #333, #222);
+    transform-origin: 50% 0%;
+    border-radius: 0 0 8px 8px;
+}
+
+/* Inner text styles */
+.ft_FlexTimer .ft_group > .ft_container > div > .inn {
+    position: absolute;
+    width: 100%;
+    height: 200%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 40px;
+    font-weight: bold;
+    color: #fff;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.ft_FlexTimer .ft_group > .ft_container > .up > .inn {
+    top: 0;
+}
+
+.ft_FlexTimer .ft_group > .ft_container > .down > .inn {
+    bottom: 0;
+}
+
+/* Flip Animation */
+.ft_FlexTimer .ft_group > .ft_container.ft_flip .up {
+    animation: flipUp 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.ft_FlexTimer .ft_group > .ft_container.ft_flip .down {
+    animation: flipDown 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+@keyframes flipUp {
+    0% {
+        transform: rotateX(0deg);
+    }
+    100% {
+        transform: rotateX(-90deg);
+    }
+}
+
+@keyframes flipDown {
+    0% {
+        transform: rotateX(90deg);
+    }
+    100% {
+        transform: rotateX(0deg);
+    }
+}
+
+/* Remove shadow animations for simplicity */
+/* .ft_FlexTimer .ft_group > .ft_container.ft_flip .up .shadow,
+.ft_FlexTimer .ft_group > .ft_container.ft_flip .down .shadow {
+    display: none;
+} */
+
+/* Reflection */
+.ft_FlexTimer.ft_reflection {
+    position: relative;
+}
+
+.ft_FlexTimer.ft_reflection::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    height: 20px;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0));
+    transform: scaleY(-1);
+    opacity: 0.5;
+}
+
+/* Hover Effects - Simplified */
+.ft_FlexTimer .ft_group > .ft_container:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .ft_FlexTimer {
+        font-size: 30px;
+    }
+
+    .ft_FlexTimer .ft_group > .ft_container {
+        width: 40px;
+        height: 60px;
+    }
+
+    .ft_FlexTimer .ft_group > .ft_container > div > .inn {
+        font-size: 30px;
+    }
+}
