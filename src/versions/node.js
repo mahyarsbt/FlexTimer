@@ -1,3 +1,3 @@
-const FlexTimer = require('../index');
+const FlexTimer = require('../index.js');
 
 module.exports = FlexTimer;

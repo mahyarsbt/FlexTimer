@@ -234,4 +234,3 @@ We welcome contributions! To get started:
 
 ## 📜 License
 FlexTimer is licensed under the MIT License.
->>>>>>> 1f2068a (Initial commit - Added FlexTimer library)

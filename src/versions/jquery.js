@@ -1,4 +1,4 @@
-import FlexTimer from '../index';
+import FlexTimer from '../index.js';
 
 (function ($) {
   $.fn.flexTimer = function (options) {

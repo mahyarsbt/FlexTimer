@@ -10,8 +10,10 @@
  *   A string representation of the value with the specified digits.
  */
 export function formatTime(value, digits = 2) {
+  // Ensure value is a number.
+  const numValue = typeof value === 'number' ? value : 0;
   // Pad the number to ensure it's the correct number of digits.
-  return value.toString().padStart(digits, '0');
+  return numValue.toString().padStart(digits, '0');
 }
 
 /**
@@ -43,4 +45,20 @@ export function getTimeDiff(diff) {
 export function isValidDate(date) {
   // Check if it's a Date object and not NaN.
   return date instanceof Date && !isNaN(date.getTime());
+}
+
+/**
+ * Normalizes time input to ensure it's either a number or a valid Date object.
+ * @param {number|Date} value - The time input to normalize.
+ * @returns {Date} - A Date object representation of the input.
+ * @throws {Error} - If the input is neither a number nor a Date object.
+ */
+export function normalizeTimeInput(value) {
+  if (typeof value === 'number') {
+    return new Date(value);
+  } else if (value instanceof Date) {
+    return value;
+  } else {
+    throw new Error('[FlexTimer] Invalid time input provided.');
+  }
 }

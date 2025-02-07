@@ -1,8 +1,13 @@
-const path = require('path');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const TerserPlugin = require('terser-webpack-plugin');
+import path from 'path';
+import { fileURLToPath } from 'url';
+import MiniCssExtractPlugin from 'mini-css-extract-plugin';
+import TerserPlugin from 'terser-webpack-plugin';
 
-module.exports = {
+// Convert `import.meta.url` to `__dirname` for ESM compatibility.
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+export default {
   mode: 'none', // No forced mode, it will be controlled by scripts
   entry: {
     'flextimer': './src/index.js', // ES6+ Standard Version
@@ -28,6 +33,7 @@ module.exports = {
     libraryTarget: 'umd',
     globalObject: 'this', // Ensures compatibility in all environments
     libraryExport: 'default',
+    iife: true,
   },
   devtool: 'source-map', // Source maps enabled for debugging
   module: {

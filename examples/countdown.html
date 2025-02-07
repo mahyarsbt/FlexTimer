@@ -1,69 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+  <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FlexTimer - Countdown</title>
     <link rel="stylesheet" href="../dist/flextimer.css">
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            background-color: #f0f0f0;
-            text-align: center;
-        }
-        #timer-container {
-            background: #ffffff;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
-        }
-        #timer {
-            font-size: 2rem;
-            font-weight: bold;
-            color: #333;
-        }
+      body {
+        font-family: Arial, sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-color: #f0f0f0;
+        text-align: center;
+      }
+
+      #timer-container {
+        background: #ffffff;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+      }
+
+      #timer {
+        font-size: 2rem;
+        font-weight: bold;
+        color: #333;
+      }
     </style>
-</head>
-<body>
-<div id="timer-container">
-    <h2>Countdown Timer</h2>
-    <div id="timer"></div>
-</div>
-<script src="../dist/flextimer.js"></script>
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        console.log('[Debug] window.FlexTimer:', window.FlexTimer);
-        if (!window.FlexTimer) {
-            console.error('[FlexTimer] Error: FlexTimer failed to load! Check the file path.');
-            return;
-        }
-        // Create a countdown timer
+  </head>
+  <body>
+    <div id="timer-container">
+      <h2>Countdown Timer</h2>
+      <div id="timer"></div>
+    </div>
+    <script src="../dist/flextimer.js"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
         const timer = new window.FlexTimer('#timer', {
-            mode: 'countdown', // Countdown mode
-            precision: 'seconds', // Display only seconds
-            from: new Date(), // Start time
-            to: new Date(Date.now() + 3600000), // End time: 1 hour later
-            showDays: true,
-            showHours: true,
-            showMinutes: true,
-            showSeconds: true,
-            showLabels: false, // Do not display unit names (seconds, minutes, ...)
-            style: 'digital', // Display style
-            theme: 'light', // Light theme
-            onTick: function(time) {
-                console.log('Time remaining:', time);
-            },
-            onComplete: function() {
-                console.log('⏳ Countdown complete!');
-                document.getElementById('timer').textContent = '⏳ Completed!';
-            }
+          mode: 'countdown',
+          to: new Date(Date.now() + 60000), // 1-minute countdown.
+          precision: 'seconds',
+          showDays: false,
+          showHours: false,
+          showMinutes: true,
+          showSeconds: true,
+          onComplete: function () {
+            alert('Countdown finished!');
+          }
         });
         timer.start();
-    });
-</script>
-</body>
+      });
+    </script>
+  </body>
 </html>

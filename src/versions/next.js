@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
 import dynamic from 'next/dynamic';
 
-const FlexTimer = dynamic(() => import('../index'), { ssr: false });
+const FlexTimer = dynamic(() => import('../index.js'), { ssr: false });
 
 const FlexTimerNext = ({ options }) => {
   const timerRef = useRef(null);

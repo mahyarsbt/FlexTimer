@@ -1,6 +1,6 @@
-import FlexTimer from '../index';
+import FlexTimer from '../index.js';
 
-// Make FlexTimer available in global scope for legacy projects
+// Make FlexTimer available in global scope for legacy projects.
 if (typeof window !== 'undefined') {
   window.FlexTimer = FlexTimer;
 }

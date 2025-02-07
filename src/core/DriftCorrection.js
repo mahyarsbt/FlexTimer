@@ -12,15 +12,18 @@ class DriftCorrection {
     this.startTime = null;
     this.lastTime = null;
     this.accumulatedDrift = 0;
+    this.drift = 0;
   }
 
   /**
    * Resets the drift correction mechanism to its initial state.
+   * @param {number} [startTime] - Optional parameter to set the start time explicitly, otherwise uses current performance time.
    */
-  reset() {
-    this.startTime = performance.now();
+  reset(startTime) {
+    this.startTime = startTime || performance.now();
     this.lastTime = this.startTime;
     this.accumulatedDrift = 0;
+    this.drift = 0;
   }
 
   /**
@@ -47,14 +50,25 @@ class DriftCorrection {
   }
 
   /**
-   * Checks for timing drift.
+   * Checks for timing drift and updates the drift value.
    * @param {number} currentTime - Current time in milliseconds.
-   * @returns {number} Drift amount in milliseconds.
+   * @returns {number} Updated drift amount in milliseconds.
    */
   checkDrift(currentTime) {
-    // Prevent undefined errors if reset() hasn't been called yet.
-    if (!this.lastTime) return 0;
-    return currentTime - (this.lastTime + this.interval);
+    if (typeof currentTime !== 'number' || isNaN(currentTime)) {
+      throw new Error("Invalid currentTime: must be a number.");
+    }
+
+    if (!this.lastTime) {
+      console.warn("Warning: checkDrift called before reset(). Returning 0.");
+      this.drift = 0;
+      return 0;
+    }
+
+    // Compute the drift.
+    this.drift = currentTime - (this.lastTime + this.interval);
+
+    return this.drift;
   }
 
 }
